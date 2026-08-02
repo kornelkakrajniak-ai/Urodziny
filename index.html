@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Niespodzianka ❤️</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<div class="hearts"></div>
+
+<!-- EKRAN Z KODEM -->
+
+<section id="login-screen" class="screen active">
+
+    <div class="card">
+
+        <img src="photo.jpg" alt="Nasze zdjęcie" id="photo">
+
+        <h1>❤️ Wszystkiego najlepszego! ❤️</h1>
+
+        <p class="subtitle">
+            Aby odblokować swoją niespodziankę,<br>
+            wpisz tajny kod.
+        </p>
+
+        <div id="dots" class="dots">
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+
+        <div class="keypad">
+
+            <button onclick="press(1)">1</button>
+            <button onclick="press(2)">2</button>
+            <button onclick="press(3)">3</button>
+
+            <button onclick="press(4)">4</button>
+            <button onclick="press(5)">5</button>
+            <button onclick="press(6)">6</button>
+
+            <button onclick="press(7)">7</button>
+            <button onclick="press(8)">8</button>
+            <button onclick="press(9)">9</button>
+
+            <button onclick="erase()">⌫</button>
+            <button onclick="press(0)">0</button>
+            <button class="confirm" onclick="checkCode()">✓</button>
+
+        </div>
+
+        <p id="error"></p>
+
+    </div>
+
+</section>
+
+<!-- EKRAN Z PREZENTAMI -->
+
+<section id="gift-screen" class="screen">
+
+    <h1>🎁 Wybierz prezent</h1>
+
+    <div class="gifts">
+
+        <div class="gift" onclick="openGift(1)">
+            <div class="lid"></div>
+            <div class="box"></div>
+        </div>
+
+        <div class="gift" onclick="openGift(2)">
+            <div class="lid"></div>
+            <div class="box"></div>
+        </div>
+
+        <div class="gift" onclick="openGift(3)">
+            <div class="lid"></div>
+            <div class="box"></div>
+        </div>
+
+    </div>
+
+</section>
+
+<!-- OKNO PREZENTU -->
+
+<div id="popup" class="popup">
+
+    <div class="popup-card">
+
+        <button class="close" onclick="closePopup()">✕</button>
+
+        <h2 id="giftTitle"></h2>
+
+    </div>
+
+</div>
+
+<script src="script.js"></script>
+
+</body>
+</html>
