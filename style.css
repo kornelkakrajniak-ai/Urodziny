@@ -484,6 +484,50 @@ h1 {
    TELEFON
 ========================= */
 
+/* =========================
+   OTWIERANIE PUDEŁKA
+========================= */
+
+.gift.opened .lid {
+    transform: translateY(-65px) rotate(-8deg);
+    box-shadow:
+        0 15px 25px rgba(45, 0, 45, .2);
+}
+
+.gift.opened {
+    transform: translateY(-5px) scale(1.04);
+}
+
+
+/* =========================
+   DRGANIE PRZY ZŁYM KODZIE
+========================= */
+
+.shake {
+    animation: shake .45s ease;
+}
+
+@keyframes shake {
+    0%, 100% {
+        transform: translateX(0);
+    }
+
+    20% {
+        transform: translateX(-10px);
+    }
+
+    40% {
+        transform: translateX(10px);
+    }
+
+    60% {
+        transform: translateX(-7px);
+    }
+
+    80% {
+        transform: translateX(7px);
+    }
+}
 @media (max-width: 600px) {
 
     .card {
