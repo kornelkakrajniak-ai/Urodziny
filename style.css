@@ -1,202 +1,529 @@
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    font-family:'Poppins',sans-serif;
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
-body{
-    overflow:hidden;
-    background:linear-gradient(135deg,#ff6ea8,#a855f7,#7c3aed);
-    min-height:100vh;
-    color:white;
+:root {
+    --pink: #ff4f9a;
+    --hot-pink: #ff2f7d;
+    --purple: #8b5cf6;
+    --deep-purple: #4c1d95;
+    --red: #c0265e;
+    --white: #ffffff;
 }
 
-.screen{
-    width:100%;
-    min-height:100vh;
-    display:none;
-    justify-content:center;
-    align-items:center;
-    flex-direction:column;
-    padding:30px;
+body {
+    min-height: 100vh;
+    overflow: hidden;
+    font-family: "Poppins", sans-serif;
+    color: white;
+    background:
+        radial-gradient(circle at 15% 20%, rgba(255, 126, 190, .45), transparent 30%),
+        radial-gradient(circle at 85% 80%, rgba(139, 92, 246, .5), transparent 35%),
+        linear-gradient(135deg, #5b174f, #8b2d68 45%, #54258d);
 }
 
-.screen.active{
-    display:flex;
+/* =========================
+   EKRANY
+========================= */
+
+.screen {
+    position: fixed;
+    inset: 0;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: 25px;
+    opacity: 0;
+    transform: scale(.98);
+    transition: opacity .7s ease, transform .7s ease;
 }
 
-.card{
-    width:100%;
-    max-width:430px;
-    padding:40px;
-    background:rgba(255,255,255,.15);
-    backdrop-filter:blur(18px);
-    border-radius:30px;
-    text-align:center;
-    box-shadow:0 20px 50px rgba(0,0,0,.25);
+.screen.active {
+    display: flex;
+    opacity: 1;
+    transform: scale(1);
 }
 
-#photo{
-    width:180px;
-    height:180px;
-    border-radius:50%;
-    object-fit:cover;
-    border:5px solid white;
-    margin-bottom:25px;
+/* =========================
+   SERDUSZKA W TLE
+========================= */
+
+.hearts {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    overflow: hidden;
+    z-index: 0;
 }
 
-h1{
-    font-size:2rem;
-    margin-bottom:15px;
+.heart {
+    position: absolute;
+    bottom: -50px;
+    color: rgba(255, 255, 255, .35);
+    animation: floatHeart linear forwards;
+    filter: drop-shadow(0 0 8px rgba(255, 130, 200, .5));
 }
 
-.subtitle{
-    opacity:.95;
-    line-height:1.6;
-    margin-bottom:25px;
-}
-
-.dots{
-    display:flex;
-    justify-content:center;
-    gap:12px;
-    margin-bottom:30px;
-}
-
-.dots span{
-    width:16px;
-    height:16px;
-    border-radius:50%;
-    border:2px solid white;
-}
-
-.dots span.filled{
-    background:white;
-}
-
-.keypad{
-    display:grid;
-    grid-template-columns:repeat(3,1fr);
-    gap:15px;
-}
-
-.keypad button{
-    height:70px;
-    border:none;
-    border-radius:18px;
-    font-size:1.4rem;
-    cursor:pointer;
-    background:white;
-    color:#b3005c;
-    transition:.2s;
-    font-weight:600;
-}
-
-.keypad button:hover{
-    transform:scale(1.05);
-}
-
-.confirm{
-    background:#ff4d94 !important;
-    color:white !important;
-}
-
-#error{
-    margin-top:18px;
-    height:22px;
-    color:#ffe0e0;
-    font-weight:600;
-}
-
-.gifts{
-    display:flex;
-    gap:40px;
-    margin-top:60px;
-    flex-wrap:wrap;
-    justify-content:center;
-}
-
-.gift{
-    width:140px;
-    cursor:pointer;
-    transition:.3s;
-}
-
-.gift:hover{
-    transform:translateY(-10px) rotate(-2deg);
-}
-
-.lid{
-    width:140px;
-    height:35px;
-    background:#ff8cb8;
-    border-radius:8px 8px 0 0;
-    position:relative;
-}
-
-.lid::before{
-    content:"🎀";
-    position:absolute;
-    left:50%;
-    top:-18px;
-    transform:translateX(-50%);
-    font-size:28px;
-}
-
-.box{
-    width:140px;
-    height:110px;
-    background:#ff5fa2;
-    border-radius:0 0 12px 12px;
-}
-
-.popup{
-    position:fixed;
-    inset:0;
-    background:rgba(0,0,0,.55);
-    display:none;
-    justify-content:center;
-    align-items:center;
-}
-
-.popup.show{
-    display:flex;
-}
-
-.popup-card{
-    width:90%;
-    max-width:420px;
-    background:white;
-    color:#a00055;
-    border-radius:25px;
-    padding:45px;
-    text-align:center;
-    position:relative;
-    animation:pop .3s;
-}
-
-.close{
-    position:absolute;
-    right:18px;
-    top:18px;
-    border:none;
-    background:none;
-    font-size:22px;
-    cursor:pointer;
-}
-
-.popup-card h2{
-    font-size:2rem;
-}
-
-@keyframes pop{
-    from{
-        transform:scale(.8);
-        opacity:0;
+@keyframes floatHeart {
+    0% {
+        transform: translateY(0) rotate(0deg) scale(.8);
+        opacity: 0;
     }
-    to{
-        transform:scale(1);
-        opacity:1;
+
+    15% {
+        opacity: 1;
+    }
+
+    100% {
+        transform: translateY(-115vh) rotate(25deg) scale(1.25);
+        opacity: 0;
+    }
+}
+
+/* =========================
+   KARTA LOGOWANIA
+========================= */
+
+.card {
+    position: relative;
+    z-index: 2;
+    width: min(92vw, 440px);
+    padding: 34px 28px 30px;
+    text-align: center;
+
+    background: rgba(255, 255, 255, .13);
+    border: 1px solid rgba(255, 255, 255, .28);
+    border-radius: 32px;
+
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+
+    box-shadow:
+        0 25px 70px rgba(35, 0, 40, .4),
+        inset 0 1px rgba(255, 255, 255, .3);
+
+    animation: cardAppear 1s ease;
+}
+
+@keyframes cardAppear {
+    from {
+        opacity: 0;
+        transform: translateY(25px) scale(.96);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+/* =========================
+   ZDJĘCIE
+========================= */
+
+#photo {
+    width: 165px;
+    height: 165px;
+    object-fit: cover;
+    border-radius: 50%;
+
+    border: 4px solid rgba(255, 255, 255, .9);
+
+    box-shadow:
+        0 0 0 8px rgba(255, 255, 255, .08),
+        0 0 35px rgba(255, 111, 180, .65);
+
+    margin-bottom: 24px;
+}
+
+/* =========================
+   TEKST
+========================= */
+
+h1 {
+    font-size: clamp(1.65rem, 6vw, 2.2rem);
+    font-weight: 600;
+    letter-spacing: -.5px;
+    margin-bottom: 12px;
+}
+
+.subtitle {
+    font-size: .92rem;
+    line-height: 1.6;
+    color: rgba(255, 255, 255, .88);
+    margin-bottom: 25px;
+}
+
+/* =========================
+   KROPKI KODU
+========================= */
+
+.dots {
+    display: flex;
+    justify-content: center;
+    gap: 13px;
+    margin-bottom: 24px;
+}
+
+.dots span {
+    width: 13px;
+    height: 13px;
+    border-radius: 50%;
+    border: 2px solid rgba(255, 255, 255, .85);
+    transition: .25s ease;
+}
+
+.dots span.filled {
+    background: white;
+    box-shadow: 0 0 12px white;
+    transform: scale(1.15);
+}
+
+/* =========================
+   KLAWIATURA
+========================= */
+
+.keypad {
+    width: min(100%, 290px);
+    margin: auto;
+
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 11px;
+}
+
+.keypad button {
+    height: 58px;
+
+    border: 1px solid rgba(255, 255, 255, .3);
+    border-radius: 17px;
+
+    background: rgba(255, 255, 255, .9);
+    color: #76245f;
+
+    font-family: inherit;
+    font-size: 1.25rem;
+    font-weight: 600;
+
+    cursor: pointer;
+
+    box-shadow:
+        0 7px 18px rgba(45, 0, 50, .2);
+
+    transition:
+        transform .15s ease,
+        box-shadow .15s ease,
+        background .15s ease;
+}
+
+.keypad button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 25px rgba(45, 0, 50, .3);
+}
+
+.keypad button:active {
+    transform: scale(.93);
+}
+
+.keypad .confirm {
+    background: linear-gradient(135deg, #ff4f9a, #d92d72) !important;
+    color: white !important;
+    box-shadow: 0 8px 25px rgba(255, 50, 140, .4);
+}
+
+/* =========================
+   BŁĘDNY KOD
+========================= */
+
+#error {
+    min-height: 22px;
+    margin-top: 15px;
+    color: #ffe0ed;
+    font-size: .85rem;
+    font-weight: 600;
+}
+
+/* =========================
+   EKRAN PREZENTÓW
+========================= */
+
+#gift-screen {
+    z-index: 2;
+}
+
+#gift-screen h1 {
+    text-align: center;
+    margin-bottom: 5px;
+    text-shadow: 0 4px 25px rgba(0, 0, 0, .2);
+}
+
+.gifts {
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    gap: clamp(25px, 6vw, 60px);
+
+    margin-top: 65px;
+
+    width: 100%;
+    flex-wrap: wrap;
+}
+
+/* =========================
+   PUDEŁKO
+========================= */
+
+.gift {
+    position: relative;
+    width: 125px;
+    height: 145px;
+    cursor: pointer;
+
+    animation: giftFloat 3s ease-in-out infinite;
+    transition: transform .25s ease;
+}
+
+.gift:nth-child(2) {
+    animation-delay: .4s;
+}
+
+.gift:nth-child(3) {
+    animation-delay: .8s;
+}
+
+.gift:hover {
+    transform: translateY(-14px) scale(1.05);
+}
+
+@keyframes giftFloat {
+    0%, 100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-9px);
+    }
+}
+
+/* pudełko */
+
+.box {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+
+    width: 125px;
+    height: 95px;
+
+    border-radius: 8px 8px 15px 15px;
+
+    background:
+        linear-gradient(
+            90deg,
+            transparent 42%,
+            rgba(255, 255, 255, .85) 43%,
+            rgba(255, 255, 255, .85) 57%,
+            transparent 58%
+        ),
+        linear-gradient(135deg, #ff4f9a, #c0265e);
+
+    box-shadow:
+        0 18px 35px rgba(40, 0, 45, .35),
+        inset 0 5px 10px rgba(255, 255, 255, .2);
+}
+
+/* wieczko */
+
+.lid {
+    position: absolute;
+    z-index: 2;
+
+    top: 35px;
+    left: -6px;
+
+    width: 137px;
+    height: 30px;
+
+    border-radius: 7px;
+
+    background:
+        linear-gradient(
+            90deg,
+            transparent 43%,
+            rgba(255, 255, 255, .9) 44%,
+            rgba(255, 255, 255, .9) 56%,
+            transparent 57%
+        ),
+        linear-gradient(135deg, #ff78b3, #df286f);
+
+    box-shadow: 0 7px 15px rgba(45, 0, 45, .25);
+
+    transition:
+        transform .65s cubic-bezier(.2,.8,.2,1),
+        top .65s cubic-bezier(.2,.8,.2,1);
+}
+
+/* kokarda */
+
+.lid::before,
+.lid::after {
+    content: "";
+    position: absolute;
+    top: -17px;
+
+    width: 32px;
+    height: 22px;
+
+    border: 6px solid #ffb3d5;
+    border-radius: 50%;
+}
+
+.lid::before {
+    left: 50%;
+    transform: translateX(-100%) rotate(25deg);
+}
+
+.lid::after {
+    left: 50%;
+    transform: rotate(-25deg);
+}
+
+/* =========================
+   POPUP PREZENTU
+========================= */
+
+.popup {
+    position: fixed;
+    z-index: 10;
+    inset: 0;
+
+    display: none;
+    justify-content: center;
+    align-items: center;
+
+    padding: 25px;
+
+    background: rgba(35, 0, 35, .7);
+
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+}
+
+.popup.show {
+    display: flex;
+}
+
+.popup-card {
+    position: relative;
+
+    width: min(90vw, 430px);
+
+    padding: 55px 30px;
+
+    border-radius: 30px;
+
+    text-align: center;
+
+    color: #8b255f;
+
+    background:
+        linear-gradient(145deg, #ffffff, #ffeaf5);
+
+    box-shadow:
+        0 25px 70px rgba(0, 0, 0, .35);
+
+    animation: popupOpen .5s cubic-bezier(.2,.8,.2,1);
+}
+
+@keyframes popupOpen {
+    from {
+        opacity: 0;
+        transform: scale(.75) translateY(30px);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
+}
+
+.popup-card h2 {
+    font-size: clamp(1.45rem, 6vw, 2rem);
+    font-weight: 600;
+}
+
+.close {
+    position: absolute;
+    top: 15px;
+    right: 18px;
+
+    width: 35px;
+    height: 35px;
+
+    border: none;
+    border-radius: 50%;
+
+    background: #f6d4e7;
+    color: #8b255f;
+
+    font-size: 18px;
+
+    cursor: pointer;
+
+    transition: .2s;
+}
+
+.close:hover {
+    transform: rotate(90deg) scale(1.08);
+}
+
+/* =========================
+   TELEFON
+========================= */
+
+@media (max-width: 600px) {
+
+    .card {
+        padding: 27px 20px 24px;
+        border-radius: 27px;
+    }
+
+    #photo {
+        width: 135px;
+        height: 135px;
+        margin-bottom: 18px;
+    }
+
+    h1 {
+        font-size: 1.55rem;
+    }
+
+    .subtitle {
+        font-size: .82rem;
+    }
+
+    .keypad {
+        gap: 9px;
+    }
+
+    .keypad button {
+        height: 54px;
+    }
+
+    .gifts {
+        gap: 18px;
+        margin-top: 45px;
+    }
+
+    .gift {
+        transform: scale(.82);
+        margin: -10px;
+    }
+
+    .gift:hover {
+        transform: scale(.88) translateY(-10px);
     }
 }
