@@ -106,7 +106,7 @@ function checkCode() {
 const gifts = {
     1: "Nocleg w Zatorze 🚉",
     2: "Bilety do Energylandii 🎫",
-    3: "Świetne towarzystwo ❤️"
+    3: "Ja ❤️"
 };
 
 
